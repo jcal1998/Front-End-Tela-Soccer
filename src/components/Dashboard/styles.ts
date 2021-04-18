@@ -5,6 +5,6 @@ export const Container = styled.main`
     margin: 0 auto;
     padding: 2rem 2rem 0 2rem;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    overflow: auto;
 `;

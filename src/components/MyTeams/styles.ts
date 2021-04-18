@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     background-color: #ffffff;
-    height: 80vh;
+    height:100%;
     width: 100%;
     border-radius: 1.2rem 1.2rem 0 0;
     margin: 2rem 2rem 0 2rem;
@@ -12,14 +12,15 @@ export const Container = styled.div`
 `
 
 export const DescriptionDiv = styled.div`
-    height: 13%;
+    height: 6rem;
     width: 100%;
     border-bottom: 0.15rem solid #f7f3f7;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    h1{
+    h1{ 
+        display:block;
         font-size: 1.5rem;
         color: var(--purpleh1);
         margin: auto 1.2rem;
@@ -40,7 +41,8 @@ export const DescriptionDiv = styled.div`
         }
 
         h2{
-        font-size: 1.7rem;
+        font-size: 2.1rem;
+        font-weight: 50;
         color: #ffffff;
         margin: auto;
         }
@@ -48,85 +50,55 @@ export const DescriptionDiv = styled.div`
     }
 `
 
-export const TeamsDiv= styled.div`
-    height: 13%;
-    width: 97%;
-    display: flex;
-    align-items: center;
-    padding: 0.18rem;
-`
 
-export const NameDiv = styled.div`
-    height: 60%;
-    margin: 0 auto;
-    width:30%;
-    border-right: 0.15rem solid #f7f3f7;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0.5rem 1rem 1.3rem;
+// import styled from "styled-components";
 
-`
+// export const Container = styled.div`
+//     background-color: #ffffff;
+//     width: 100%;
+//     border-radius: 1.2rem 1.2rem 0 0;
+//     margin: 2rem 2rem 0 2rem;
+//     display: flex;
+//     flex-direction:column;
+//     align-items: center;
+//     border: 2px solid black;
+// `
 
-export const Description= styled.div`
-    height: 80%;
-    margin: 0 auto;
-    width:70%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0.5rem 1rem 0.5rem;
-`
+// export const DescriptionDiv = styled.div`
+//     height: 6rem;
+//     width: 100%;
+//     border-bottom: 0.15rem solid #f7f3f7;
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     padding: 1rem;
+//     h1{ 
+//         display:block;
+//         font-size: 1.5rem;
+//         color: var(--purpleh1);
+//         margin: auto 1.2rem;
+//     }
 
-export const Team= styled.div`
-    height: 9%;
-    width: 97%;
-    display: flex;
-    align-items: center;
-    padding: 0.18rem;
-    border-bottom: 0.075rem solid #f7f3f7;
-    border-top: 0.075rem solid #f7f3f7;
+//     button{
+//         height: 3rem;
+//         width: 3rem;
+//         margin: auto 0.5rem;
+//         background-color: #98367d;
+//         border: 0;
+//         border-radius:0.7rem;
 
-    &:hover{
-        background-color: #f7eef7;
-        border-radius:0.5rem;
-        border-bottom: 0.1rem solid #ffffff;
-        border-top: 0.1rem solid #ffffff;
+//         transition : filter 0.2s;
 
-        div{
+//         &:hover{
+//             filter: brightness(0.85) ;
+//         }
 
-            img{
-                height:1rem;
-                width:1rem;
-                margin:0.5rem;
-            }
-        }
+//         h2{
+//         font-size: 2.1rem;
+//         font-weight: 50;
+//         color: #ffffff;
+//         margin: auto;
+//         }
 
-        h3{
-            color: #c673a1;
-        }
-        
-    }
-
-`
-
-export const TeamName= styled.div`
-    height: 60%;
-    margin: 0 auto;
-    width:30%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0.5rem 1rem 1.3rem;
-`
-
-export const TeamDescription= styled.div`
-    height: 80%;
-    margin: 0 auto;
-    width:70%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0.5rem 1rem 0.5rem;
-
-`
+//     }
+// `
