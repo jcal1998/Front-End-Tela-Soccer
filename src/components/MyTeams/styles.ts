@@ -4,8 +4,8 @@ export const Container = styled.div`
     background-color: #ffffff;
     height:100%;
     width: 100%;
-    border-radius: 1.2rem 1.2rem 0 0;
-    margin: 2rem 2rem 0 2rem;
+    border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;
+    margin: 2rem 2rem 2rem 2rem;
     display: flex;
     flex-direction:column;
     align-items: center;

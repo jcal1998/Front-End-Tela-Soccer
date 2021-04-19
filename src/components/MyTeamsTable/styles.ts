@@ -3,10 +3,13 @@ import styled from 'styled-components';
 export const Container = styled.div`
     width: 100%;
     margin-top:1rem;
-    padding: 0 0.75rem;
+    padding: 0 0.75rem 1rem 0.75rem;
 `
-export const TeamsDiv= styled.div`
+export const TeamsDiv= styled.button`
     height: 4rem;
+    background: transparent;
+    border: 0;
+    outline:none;
     width: 100%;
     display: flex;
     align-items: center;

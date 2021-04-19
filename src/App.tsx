@@ -1,5 +1,5 @@
-import { Home } from './Home';
-import {Register} from './Register'
+import { Home } from './Pages/Home';
+import {Register} from './Pages/Register'
 import { GlobalStyle } from './styles/global'
 import { TeamsProvider} from './TeamsContext';
 import {BrowserRouter, Switch, Route} from 'react-router-dom'

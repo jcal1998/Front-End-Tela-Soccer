@@ -1,5 +1,5 @@
-import { useEffect, useState , useCallback, FormEvent, useContext} from 'react'
-import {Container, TeamInformationDiv, CreateTitleDiv, RadioDiv, FormDiv, InputDiv,ChooseDiv, ConfigureSquadDiv, SquadContent, FormationDiv, SearchPlayersDiv, FormationType, SoccerField, Button, PlayersDiv, Div, WtfDiv} from './styles'
+import { useEffect, useState , useCallback,  useContext} from 'react'
+import {Container, TeamInformationDiv, CreateTitleDiv, RadioDiv, FormDiv, InputDiv,ChooseDiv, Content,ConfigureSquadDiv, SquadContent, FormationDiv, SearchPlayersDiv, FormationType, SoccerField, Button, PlayersDiv, Div, WtfDiv} from './styles'
 import { api } from '../../services/api';
 import {debounce} from 'debounce'
 import Modal from 'react-modal'
@@ -9,37 +9,47 @@ import {TeamsContext} from '../../TeamsContext'
 Modal.setAppElement('#root')
 
 export function TeamInformation(){
-    const contextData = useContext(TeamsContext);
+    const { createTeam,teams } = useContext(TeamsContext)
     const [ nameFocus, setNameFocus ] = useState (false)
     const [ siteFocus, setsiteFocus ] = useState (false) 
-    const [Name , setName] = useState('')
+    const [ descriptionFocus, setDescriptionFocus ] = useState (false) 
+    const [TeamName , setTeamName] = useState('')
+    const [Description, setDescription] = useState('')
     const [Website, setWebsite] = useState('')
     const [Type, setType] = useState('')
-    const [Formation, setFormation] = useState('')
-    const [Player1, setPlayer1] = useState('')
-    const [Player2, setPlayer2] = useState('')
-    const [Player3, setPlayer3] = useState('')
+    const [Formation, setFormation] = useState('1')
     const [ repositories, setRepositories] = useState ([])
-    const [ search, setSearch] = useState ("")
+    const [ search, setSearch] = useState ('Neymar')
     const [ successModalIsOpen, setSuccessModalIsOpen] = useState(false)
     let history = useHistory();
 
-    const debounceSearch = useCallback(debounce((variable:any)=>{setSearch(variable);},700),[],) //eslint-disable-line react-hooks/exhaustive-deps
+    const debounceSearch = useCallback(debounce((variable: string)=>{//eslint-disable-line react-hooks/exhaustive-deps
+        if(variable.length>3)
+        setSearch(variable);
 
-    console.log(contextData)
+    },700),[],) 
 
-    const Variable = (e : any) => {
-        const { value:variable } = e.target
-        debounceSearch(variable);
+    const Variable = ( value : string ) => {
+        debounceSearch(value);
     }
 
-    const HandleCreateTeam = (event: FormEvent) =>{
+
+    const HandleCreateTeam = (event: any) =>{
         event.preventDefault();
-        const data = {Name, Website, Type, Formation, Player1, Player2, Player3 };
-        console.log(data);
-
-        api.post('http://localhost:3000/teams', data)
-
+        const {name , age, nationality , carro , aviao, barco} = event.target
+        const Player1 = { name : name.value, age : age.value, nationality : nationality.value}
+        const Player2 = { name: carro.value , age: aviao.value , nationality: barco.value }
+        let Avg = 2;
+        createTeam({
+            TeamName,
+            Description,
+            Website,
+            Type,
+            Formation,
+            Players : [Player1 , Player2],
+            Avg
+        })
+        console.log(teams)
         handleOpenSuccessModal()
     }
 
@@ -48,17 +58,22 @@ export function TeamInformation(){
     }
 
 
-
     const handleCloseSuccessModal = ()=> {
         setSuccessModalIsOpen(false)
         history.push("/")
     }
 
+    const ChangeType = ( value : any)=>{
+        setType(value)
+
+    }
+
     useEffect(() => {
         // `https://v3.football.api-sports.io/players?search=${search}&season=2019`
-        api.get(`https://v1.basketball.api-sports.io/teams?search=${search}`)
-        .then(response => {
-            setRepositories( response.data.response)
+        api.get(`https://v2.api-football.com/players/search/${search}`)
+        .then( response => {
+            console.log("chamou a API")
+            setRepositories (response.data.api.players)
         })
         .catch(err => {
             console.log(err);
@@ -70,13 +85,18 @@ export function TeamInformation(){
             <CreateTitleDiv>
                 <h1>Create your team</h1>
             </CreateTitleDiv>
-            <form onSubmit={HandleCreateTeam}>
+            <Content>
                 <TeamInformationDiv>
                     <h1>Team Information</h1>
-                    <FormDiv>
+                    <FormDiv >
                         <InputDiv isFocused={nameFocus===true} onFocus={()=>{setNameFocus(true)}} onBlur={()=>{setNameFocus(false)}}>
                             <label><h3>Team name</h3>
-                                <input value={Name} onChange={e=>setName(e.target.value)} placeholder="insert team name" required/>
+                                <input value={TeamName} onChange={e=>setTeamName(e.target.value)} placeholder="insert team name" required/>
+                            </label>
+                        </InputDiv>
+                        <InputDiv isFocused={descriptionFocus===true} onFocus={()=>{setDescriptionFocus(true)}} onBlur={()=>{setDescriptionFocus(false)}}>
+                            <label><h3>Team fullname</h3>
+                                <input value={Description} onChange={e=>setDescription(e.target.value)} placeholder="insert team name" required/>
                             </label>
                         </InputDiv>
                         <InputDiv isFocused={siteFocus===true} onFocus={()=>{setsiteFocus(true)}} onBlur={()=>{setsiteFocus(false)}}>
@@ -88,15 +108,16 @@ export function TeamInformation(){
                             <h3>Team type</h3>
                             <div> 
                                 <ChooseDiv isFocused={ Type ==='real'}>                                
-                                    <input onChange={e=>setType(e.target.value)} type="radio" id="real" name="Type" value="real" required/>
+                                    <input onChange={e=>ChangeType(e.target.id)} type="radio" id="real" name="Type" value="real" required/>
                                     <label htmlFor="real">Real</label>
                                 </ChooseDiv>
                                 <ChooseDiv isFocused={ Type ==='fantasy'}>                                
-                                    <input onChange={e=>setType(e.target.value)} type="radio" id="fantasy" name="Type" value="fantasy" required />
+                                    <input onChange={e=>ChangeType(e.target.id)} type="radio" id="fantasy" name="Type" value="fantasy" required />
                                     <label htmlFor="fantasy">Fantasy</label>
                                 </ChooseDiv>
                             </div>
                         </RadioDiv>
+                        <button type="submit" />
                     </FormDiv>
                 </TeamInformationDiv>
                 <ConfigureSquadDiv>
@@ -118,36 +139,41 @@ export function TeamInformation(){
                                 </select>
                             </FormationType>
                             {/* fazer um if return aqui */}
-                            <SoccerField>
-                            <label><h3>Player1</h3>
-                                <input onChange={e=>setPlayer1(e.target.value)} placeholder="insert team name" required/>
-                            </label>
-                            <label><h3>Player2</h3>
-                                <input onChange={e=>setPlayer2(e.target.value)} placeholder="insert team name" required/>
-                            </label>
-                            <label><h3>Player3</h3>
-                                <input onChange={e=>setPlayer3(e.target.value)} placeholder="insert team name" required/>
-                            </label>
-                            </SoccerField>
-                            <Button>Save</Button>
+                            <form onSubmit={HandleCreateTeam}> 
+                                <SoccerField>       
+                                    <label htmlFor="name"><h3>Player1</h3></label>
+                                    <input name="name" placeholder="insert team name" required/>
+                                    <label htmlFor="age"><h3>Age</h3> </label>
+                                    <input name="age" type="number" placeholder="insert team name" required/>
+                                    <label htmlFor="nationality"><h3>Nationality</h3></label>
+                                    <input name="nationality" placeholder="insert team name" required/>
+                                    <label htmlFor="carro"><h3>Player2</h3></label>
+                                    <input name="carro" placeholder="insert team name" required/>
+                                    <label htmlFor="aviao"><h3>Age2</h3> </label>
+                                    <input name="aviao" type="number" placeholder="insert team name" required/>
+                                    <label htmlFor="barco"><h3>Nationality2</h3></label>
+                                    <input name="barco" placeholder="insert team name" required/>
+                                </SoccerField>
+                            <Button type="submit">Save</Button>
+                            </form>
                         </FormationDiv>
                         <SearchPlayersDiv>
                             <WtfDiv>
-                                <label><h3>Search Teams</h3>
-                                    <input onChange={Variable} placeholder="Player name" name="player"/>
+                                <label><h3>Search player</h3>
+                                    <input onChange={ e=>Variable(e.target.value)} placeholder="Player name" name="player"/>
                                 </label>
                                 {repositories.map(repository => (                                
-                                    <PlayersDiv key={repository["id"]}>
+                                    <PlayersDiv key={repository["player_id"]}>
                                         <Div>
                                             <div>
-                                                Name: <h5>{repository["name"]}</h5>
+                                                Name: <h5>{repository["player_name"]}</h5>
                                             </div>
                                             <div>
-                                                id: <h5>{repository["id"]}</h5>
+                                                Age: <h5>{repository["age"]}</h5>
                                             </div>
                                         </Div>
                                         <div>
-                                            Nacional? <h5>{repository["nationnal"]}</h5>
+                                            Nationality <h5>{repository["nationality"]}</h5>
                                         </div>
                                     </PlayersDiv>
                                 ))}
@@ -159,7 +185,7 @@ export function TeamInformation(){
                     <h2>Time cadastrado com sucesso !! 🎉✨🎇🎆</h2>
                     <button type="button" onClick={handleCloseSuccessModal} className="react-modal-close"><p>Clique para sair</p></button>
                 </Modal>
-            </form>
+            </Content>
         </Container>
     )
 }

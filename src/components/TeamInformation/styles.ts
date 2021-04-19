@@ -7,10 +7,11 @@ export const Container = styled.div`
     align-items: center;
     flex-direction: column;
 
-    form{
-        padding: 1rem;
-        width: 100%;
-    }
+`
+
+export const Content = styled.div`
+    padding: 1rem;
+    width: 100%;
 `
 
 export const CreateTitleDiv = styled.div`
@@ -29,7 +30,8 @@ export const CreateTitleDiv = styled.div`
 `
 
 export const TeamInformationDiv = styled.div`
-
+    padding: 1rem;
+    width: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -44,7 +46,7 @@ export const TeamInformationDiv = styled.div`
 
 `
 
-export const FormDiv = styled.div`
+export const FormDiv = styled.form`
     margin-top: 2rem;
     width: 100%;
     display: flex;
@@ -176,6 +178,7 @@ export const SoccerField = styled.div`
     width:30rem;
     height:52rem;
     background-image: linear-gradient(#ba3d7b, #6b3087);
+
 `
 
 export const Button = styled.button`
@@ -252,7 +255,6 @@ export const Div = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-
 
 `
 

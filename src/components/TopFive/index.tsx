@@ -1,6 +1,7 @@
 import {Container, DescriptionDiv, TableContainer, PickedPlayersContainer, BigContainer } from './styles'
 import { TopFiveTable} from '../TopFiveTable'
 import { PickedPlayers} from '../PickedPlayers'
+import { LowestFiveTable} from '../LowestFiveTable'
 
 export function TopFive(){
     return (
@@ -13,9 +14,9 @@ export function TopFive(){
                     <TopFiveTable>
                         Highest avg age
                     </TopFiveTable>
-                    <TopFiveTable>
+                    <LowestFiveTable>
                         Lowest avg age
-                    </TopFiveTable>
+                    </LowestFiveTable>
                 </TableContainer>
                 <PickedPlayersContainer>
                     <PickedPlayers />

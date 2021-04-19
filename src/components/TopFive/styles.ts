@@ -44,7 +44,7 @@ export const PickedPlayersContainer = styled.div`
     height:69rem;
     width:100%;
     background-image: linear-gradient(#ba3d7b, #6b3087);
-    border-radius: 1.2rem 1.2rem 0 0;
+    border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;
     display: flex;
 `
 

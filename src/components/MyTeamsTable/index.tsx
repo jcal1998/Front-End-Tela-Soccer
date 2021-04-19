@@ -9,7 +9,9 @@ import { TeamsContext } from '../../TeamsContext'
 
 export function MyTeamsTable(){
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const teams = useContext(TeamsContext);
+    const {teams} = useContext(TeamsContext);
+    const [sortBool , setSortBool] = useState(false)
+    const newTeam = [ ...teams ]
 
     function handleOpenModal() {
         setIsModalOpen(true)
@@ -19,9 +21,34 @@ export function MyTeamsTable(){
         setIsModalOpen(false)
     }
 
+    const handleSortBool = () => {
+        setSortBool(!sortBool)
+        if(sortBool){
+            newTeam.sort( ( a: any, b: any) =>{
+                let x = a.TeamName.toUpperCase()
+                let y = b.TeamName.toUpperCase()
+                console.log('deu')
+                return x===y ? 0 : x > y ? 1: -1;
+            })
+        }else{
+            newTeam.sort( ( a: any, b: any) =>{
+                let x = a.TeamName.toUpperCase()
+                let y = b.TeamName.toUpperCase()
+                console.log('deu')
+                return x===y ? 0 : x < y ? 1: -1;
+            })
+        }
+        console.log(sortBool)
+    }
+    newTeam.sort( ( a: any, b: any) =>{
+        let x = a.TeamName.toUpperCase()
+        let y = b.TeamName.toUpperCase()
+        return x===y ? 0 : x < y ? 1: -1;
+    })
+
     return (
         <Container>
-            <TeamsDiv>
+            <TeamsDiv onClick={handleSortBool}>
                 <NameDiv>
                     <h3>Name</h3>
                     <h3>🔽</h3>
@@ -31,9 +58,9 @@ export function MyTeamsTable(){
                     <h3>🔽</h3>
                 </Description>
             </TeamsDiv>
-            {teams.map(team =>(
-                <Team key={team.Name}>
-                    <TeamName><h3>{team.Name}</h3></TeamName>
+            {newTeam.map(team =>(
+                <Team key={team.TeamName}>
+                    <TeamName><h3>{team.TeamName}</h3></TeamName>
                     <TeamDescription>
                         <h3>{team.Description}</h3>
                         <div >

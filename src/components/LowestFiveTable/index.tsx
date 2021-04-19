@@ -2,13 +2,13 @@ import { useContext } from 'react'
 import { TeamsContext } from '../../TeamsContext'
 import {Container, Content, TopFiveDiv, TeamDiv} from './styles'
 
-export function TopFiveTable(props : any){
+export function LowestFiveTable(props : any){
     const {teams } = useContext(TeamsContext)
 
     const newTeam = [ ...teams ]
 
     newTeam.sort( ( a: any, b: any) =>{
-        return b.Avg - a.Avg
+        return a.Avg - b.Avg
     })
 
     return (

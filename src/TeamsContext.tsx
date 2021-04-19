@@ -1,34 +1,44 @@
-import {createContext, useState, ReactNode, useEffect} from 'react'
-import { api } from './services/api';
+import {createContext, useState, ReactNode} from 'react'
+import {Data} from './components/Data'
 
-interface Teams {
-    Name : string;
+interface Player{
+    name : string;
+    age: number;
+    nationality: string;
+}
+
+interface Team {
+    TeamName : string;
     Description: string;
     Avg: number;
     Website: string;
     Type : string;
-    Formation : number;
-    Players : any;
+    Formation : string;
+    Players : Player[];
 }
 
 interface TeamsProviderProps {
     children:  ReactNode;
 }
 
-export const TeamsContext = createContext<Teams[]>([]);
+interface TeamsContextData {
+    teams: Team[];
+    createTeam: (team: Team ) => void
+}
+
+export const TeamsContext = createContext<TeamsContextData>(
+    {} as TeamsContextData
+);
 
 export function TeamsProvider( {children}:TeamsProviderProps ){
-    const [teams, setTeams] = useState<Teams[]>([])
+    const [teams, setTeams] = useState<Team[]>(Data)
 
-    useEffect(()=>{
-        api.get('http://localhost:3000/teams')
-        .then(response => setTeams(response.data.teams))
-        console.log(teams)
-    })
+    function  createTeam( team : Team) {
+        setTeams([...teams, team])
+    }
 
-    console.log(setTeams)
     return(
-        <TeamsContext.Provider value={teams}>
+        <TeamsContext.Provider value={{teams , createTeam}}>
             {children}
         </TeamsContext.Provider>
     )
