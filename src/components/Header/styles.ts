@@ -17,10 +17,12 @@ export const Content = styled.div`
 
 `
 
-export const LogoDiv = styled.div`
+export const LogoDiv = styled.button`
   display: flex;
   align-items: center;
-
+  border:0;
+  background-color:transparent;
+  outline: none;
   h1{
     font-size: 1.4rem;
     color: #f3f5f7;

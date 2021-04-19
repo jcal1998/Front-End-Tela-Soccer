@@ -26,15 +26,21 @@ export const DescriptionDiv = styled.div`
         margin: auto 1.2rem;
     }
 
-    button{
+    .button{
         height: 3rem;
         width: 3rem;
         margin: auto 0.5rem;
         background-color: #98367d;
         border: 0;
         border-radius:0.7rem;
-
+        box-shadow: 0 0 25px #98367d;
+        text-decoration:none;
         transition : filter 0.2s;
+        display:flex;
+        align-items: center;
+        padding-left:0.77rem;
+
+
 
         &:hover{
             filter: brightness(0.85) ;
@@ -44,7 +50,6 @@ export const DescriptionDiv = styled.div`
         font-size: 2.1rem;
         font-weight: 50;
         color: #ffffff;
-        margin: auto;
         }
 
     }

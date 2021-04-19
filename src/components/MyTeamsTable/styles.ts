@@ -43,6 +43,12 @@ export const Team= styled.div`
     padding: 0.18rem;
     border-bottom: 0.075rem solid #f7f3f7;
     border-top: 0.075rem solid #f7f3f7;
+    button{
+        background:transparent;
+        border:0;
+        outline: none;
+    }
+
     img{
         visibility: hidden;
         height:1rem;
@@ -60,7 +66,6 @@ export const Team= styled.div`
         border-top: 0.1rem solid #ffffff;
 
         div{
-
             img{
                 visibility: visible
                 ;

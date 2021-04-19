@@ -2,7 +2,23 @@ import {Container, NameDiv, Description, Team, TeamsDiv, TeamName, TeamDescripti
 import lixoImg from '../../assets/lixo.svg'
 import editImg from '../../assets/editar.svg'
 
+import { useState, useContext} from 'react'
+import Modal from 'react-modal'
+import { TeamsContext } from '../../TeamsContext'
+
+
 export function MyTeamsTable(){
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const teams = useContext(TeamsContext);
+
+    function handleOpenModal() {
+        setIsModalOpen(true)
+    }
+
+    function handleCloseModal() {
+        setIsModalOpen(false)
+    }
+
     return (
         <Container>
             <TeamsDiv>
@@ -15,168 +31,21 @@ export function MyTeamsTable(){
                     <h3>🔽</h3>
                 </Description>
             </TeamsDiv>
-            <Team>
-                <TeamName><h3>Barcelona</h3></TeamName>
-                <TeamDescription>
-                    <h3>Barcelona Squad</h3>
-                    <div >
-                        <a href="https://www.google.com/"><img src={lixoImg} alt="Delete" title="Delete"/></a>
-                        <a href="https://www.google.com/"><img src={editImg} alt="Edit" title="Edit"/></a>
-                    </div>
-                </TeamDescription>
-            </Team>
-            <Team>
-                <TeamName><h3>Real Madrid</h3></TeamName>
-                <TeamDescription>
-                    <h3>Real Madrid Squad</h3>
-                    <div >
-                        <a href="https://www.google.com/"><img src={lixoImg} alt="Delete" title="Delete"/></a>
-                        <a href="https://www.google.com/"><img src={editImg} alt="Edit" title="Edit"/></a>
-                    </div>
-                </TeamDescription>
-            </Team>
-            <Team>
-                <TeamName><h3>Milan</h3></TeamName>
-                <TeamDescription>
-                    <h3>Milan Squad</h3>
-                    <div >
-                        <a href="https://www.google.com/"><img src={lixoImg} alt="Delete" title="Delete"/></a>
-                        <a href="https://www.google.com/"><img src={editImg} alt="Edit" title="Edit"/></a>
-                    </div>
-                </TeamDescription>
-            </Team>
-            <Team>
-                <TeamName><h3>Liverpool</h3></TeamName>
-                <TeamDescription>
-                    <h3>Liverpool Squad</h3>
-                    <div >
-                        <a href="https://www.google.com/"><img src={lixoImg} alt="Delete" title="Delete"/></a>
-                        <a href="https://www.google.com/"><img src={editImg} alt="Edit" title="Edit"/></a>
-                    </div>
-                </TeamDescription>
-            </Team>
-            <Team>
-                <TeamName><h3>Bayen</h3></TeamName>
-                <TeamDescription>
-                    <h3>Bayern Munich Squad</h3>
-                    <div >
-                        <a href="https://www.google.com/"><img src={lixoImg} alt="Delete" title="Delete"/></a>
-                        <a href="https://www.google.com/"><img src={editImg} alt="Edit" title="Edit"/></a>
-                    </div>
-                </TeamDescription>
-            </Team>
-            <Team>
-                <TeamName><h3>Lazio</h3></TeamName>
-                <TeamDescription>
-                    <h3>Lazio Squad</h3>
-                    <div >
-                        <a href="https://www.google.com/"><img src={lixoImg} alt="Delete" title="Delete"/></a>
-                        <a href="https://www.google.com/"><img src={editImg} alt="Edit" title="Edit"/></a>
-                    </div>
-                </TeamDescription>
-            </Team>
+            {teams.map(team =>(
+                <Team key={team.Name}>
+                    <TeamName><h3>{team.Name}</h3></TeamName>
+                    <TeamDescription>
+                        <h3>{team.Description}</h3>
+                        <div >
+                            <button ><img src={lixoImg} alt="Delete" title="Delete"/></button>
+                            <button onClick={handleOpenModal}><img src={editImg} alt="Edit" title="Edit"/></button>
+                        </div>
+                        <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
+                            <h2>Editar time</h2>
+                        </Modal>
+                    </TeamDescription>
+                </Team>
+            ))}
         </Container>
     )
 }
-
-
-
-
-// export function MyTeamsTable(){
-//     return (
-//         <Container>
-//             <table>
-//                 <thead>
-//                     <tr>
-//                         <th>
-//                             <HeadDiv>
-//                                 <h3>Name</h3>    
-//                                 <h3>🔽</h3>
-//                             </HeadDiv>
-//                         </th>
-//                         <th>
-//                             <HeadDiv>
-//                                 <h3>Description</h3>    
-//                                 <h3>🔽</h3>
-//                             </HeadDiv>
-//                         </th>
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     <TR>
-//                         <td><h3>Barcelona</h3></td>
-//                         <td>
-//                             <div>
-//                                 <div><h3>Barcelona Squad</h3></div>
-//                                 <div >
-//                                     <a href="https://www.google.com/"><img src={lixoImg} alt="Delete" title="Delete"/></a>
-//                                     <a href="https://www.google.com/"><img src={editImg} alt="Edit" title="Edit"/></a>
-//                                 </div>
-//                             </div>
-//                         </td>
-//                     </TR>
-//                     <TR>
-//                         <td><h3>Real Madrid</h3></td>
-//                         <td>
-//                             <div>
-//                                 <div><h3>Real Madrid Squad</h3></div>
-//                                 <div >
-//                                     <a href="https://www.google.com/"><img src={lixoImg} alt="Delete" title="Delete"/></a>
-//                                     <a href="https://www.google.com/"><img src={editImg} alt="Edit" title="Edit"/></a>
-//                                 </div>
-//                             </div>
-//                         </td>
-//                     </TR>
-//                     <TR>
-//                         <td><h3>Milan</h3></td>
-//                         <td>
-//                             <div>
-//                                 <div><h3>Milan Squad</h3></div>
-//                                 <div >
-//                                     <a href="https://www.google.com/"><img src={lixoImg} alt="Delete" title="Delete"/></a>
-//                                     <a href="https://www.google.com/"><img src={editImg} alt="Edit" title="Edit"/></a>
-//                                 </div>
-//                             </div>
-//                         </td>
-//                     </TR>
-//                     <TR>
-//                         <td><h3>Liverpool</h3></td>
-//                         <td>
-//                             <div>
-//                                 <div><h3>Liverpool Squad</h3></div>
-//                                 <div >
-//                                     <a href="https://www.google.com/"><img src={lixoImg} alt="Delete" title="Delete"/></a>
-//                                     <a href="https://www.google.com/"><img src={editImg} alt="Edit" title="Edit"/></a>
-//                                 </div>
-//                             </div>
-//                         </td>
-//                     </TR>
-//                     <TR>
-//                         <td><h3>Bayen</h3></td>
-//                         <td>
-//                             <div>
-//                                 <div><h3>Bayen Squad</h3></div>
-//                                 <div >
-//                                     <a href="https://www.google.com/"><img src={lixoImg} alt="Delete" title="Delete"/></a>
-//                                     <a href="https://www.google.com/"><img src={editImg} alt="Edit" title="Edit"/></a>
-//                                 </div>
-//                             </div>
-//                         </td>
-//                     </TR>
-//                     <TR>
-//                         <td><h3>Lazio</h3></td>
-//                         <td>
-//                             <div>
-//                                 <div><h3>Lazio Squad</h3></div>
-//                                 <div >
-//                                     <a href="https://www.google.com/"><img src={lixoImg} alt="Delete" title="Delete"/></a>
-//                                     <a href="https://www.google.com/"><img src={editImg} alt="Edit" title="Edit"/></a>
-//                                 </div>
-//                             </div>
-//                         </td>
-//                     </TR>
-//                 </tbody>
-//             </table>
-//         </Container>
-//     )
-// }

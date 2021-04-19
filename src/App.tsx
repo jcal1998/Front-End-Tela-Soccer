@@ -1,19 +1,22 @@
-import { Dashboard } from './components/Dashboard';
-import { Header } from './components/Header';
+import { Home } from './Home';
+import {Register} from './Register'
 import { GlobalStyle } from './styles/global'
-import { Footer } from './components/Footer';
-import { CreateYourTeam } from './components/CreateYourTeam'
+import { TeamsProvider} from './TeamsContext';
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
 
 
 export function App() {
   return (
-    <>
-      <Header />
-      <CreateYourTeam />
-      <Footer />
+    <TeamsProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact={true} component={Home}/>
+          <Route path="/cadastro" component={Register}/>
+        </Switch>
+      </BrowserRouter>
       <GlobalStyle />
-    </>
+    </TeamsProvider>
   );
 }
 

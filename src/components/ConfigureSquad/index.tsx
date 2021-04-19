@@ -1,32 +1,31 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState , useCallback} from 'react'
+import { api } from '../../services/api';
 import {ConfigureSquadDiv, SquadContent, FormationDiv, SearchPlayersDiv, FormationType, SoccerField, Button, PlayersDiv, Div, WtfDiv} from './styles'
-
-
+import {debounce} from 'debounce'
 
 export function ConfigureSquad(){
-    const [player, setPlayer] = useState ( { name : '' , age : '' , nacionality : ''})
+    const [repositories, setRepositories] = useState ([])
+    const [search, setSearch] = useState ("")
+
+    const debounceSearch = useCallback(debounce((variable:any)=>{setSearch(variable);},700),[],) //eslint-disable-line react-hooks/exhaustive-deps
+
+    const Variable = (e : any) => {
+        const { value:variable } = e.target
+        debounceSearch(variable);
+    }
 
     useEffect(() => {
-        // fetch(`https://v3.football.api-sports.io/players?id=276&season=2019`, {
-        //     "method": "GET",
-        //     "headers": {
-        //         "x-rapidapi-host": "v3.football.api-sports.io",
-        //         "x-rapidapi-key": "4fcaa9a41f416a9721da54281b7a293e"
-        //     }
-        // })
-        fetch('http://localhost:3000/api/players')
-        .then(response => response.json())
-        .then(data => {
-            const newPlayer = { name : data[0].player.firstname.concat(" ").concat(data[0].player.lastname), age : data[0].player.age , nacionality : data[0].player.nationality }
-            setPlayer (newPlayer)
+        console.log("pqpviu")
+        // `https://v3.football.api-sports.io/players?search=${search}&season=2019`
+        api.get(`https://v1.basketball.api-sports.io/teams?search=${search}`)
+        .then(response => {
+            setRepositories( response.data.response)
+            console.log("pqpviu")
         })
         .catch(err => {
             console.log(err);
         });
-    }, []);
-    console.log(player);;
-
-    // const name = data.response[0].player.firstname.concat(data.response[0].player.lastname)
+    }, [search]);
 
     return (
         <ConfigureSquadDiv>
@@ -54,24 +53,43 @@ export function ConfigureSquad(){
                 </FormationDiv>
                 <SearchPlayersDiv>
                     <WtfDiv>
-
-                            <label><h3>Search Players</h3>
-                                <input placeholder="Player name" name="player"/>
-                            </label>
-
-                        <PlayersDiv>
-                            <Div>
-                                <div>
-                                    Name: <h5>{player.name}</h5>
-                                </div>
-                                <div>
-                                    Age: <h5>{player.age}</h5>
-                                </div>
-                            </Div>
-                            <div>
-                                Nacionality: <h5>{player.nacionality}</h5>
-                            </div>
-                        </PlayersDiv>
+                        <label><h3>Search Teams</h3>
+                            <input onChange={Variable} placeholder="Player name" name="player"/>
+                        </label>
+                        {repositories.map(repository => {
+                            if(repository["nationnal"])
+                                return (                                
+                                <PlayersDiv>
+                                    <Div>
+                                        <div>
+                                            Name: <h5>{repository["name"]}</h5>
+                                        </div>
+                                        <div>
+                                            id: <h5>{repository["id"]}</h5>
+                                        </div>
+                                    </Div>
+                                    <div>
+                                        Nacional? <h5>Não</h5>
+                                    </div>
+                                </PlayersDiv>
+                                )
+                            else                                 
+                                return (                                
+                                    <PlayersDiv>
+                                        <Div>
+                                            <div>
+                                                Name: <h5>{repository["name"]}</h5>
+                                            </div>
+                                            <div>
+                                                id: <h5>{repository["id"]}</h5>
+                                            </div>
+                                        </Div>
+                                        <div>
+                                            Nacional? <h5>Não</h5>
+                                        </div>
+                                    </PlayersDiv>
+                                )
+                        })}
                     </WtfDiv>
 
                 </SearchPlayersDiv>
