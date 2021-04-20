@@ -13,7 +13,7 @@ export function TeamInformation(){
     const [ nameFocus, setNameFocus ] = useState (false)
     const [ siteFocus, setsiteFocus ] = useState (false) 
     const [ descriptionFocus, setDescriptionFocus ] = useState (false) 
-    const [TeamName , setTeamName] = useState('')
+    const [TeamName , setTeamName] = useState('adas')
     const [Description, setDescription] = useState('')
     const [Website, setWebsite] = useState('')
     const [Type, setType] = useState('')
@@ -39,9 +39,10 @@ export function TeamInformation(){
         const {name , age, nationality , carro , aviao, barco} = event.target
         const Player1 = { name : name.value, age : age.value, nationality : nationality.value}
         const Player2 = { name: carro.value , age: aviao.value , nationality: barco.value }
-        console.log([Player1.age , Player2.age ])
+        let Avg = 0;
 
-        let Avg = (Player1.age + Player2.age)/2 ;
+        Avg = (parseInt(Player1.age) + parseInt(Player2.age))/2;
+
         createTeam({
             TeamName,
             Description,

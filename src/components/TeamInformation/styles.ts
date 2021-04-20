@@ -122,7 +122,6 @@ interface ChooseDivProps{
 
 export const ChooseDiv = styled.div<ChooseDivProps>`
     color: ${(props)=>props.isFocused? '#bc0f51' : 'black'} ;
-    
 `
 
 export const ConfigureSquadDiv = styled.div`

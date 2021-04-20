@@ -18,7 +18,7 @@ export function LowestFiveTable(props : any){
                 <h3>{props.children}</h3>
                 <TopFiveDiv>
                     {bottom5.map( time => (                    
-                        <TeamDiv>
+                        <TeamDiv key={time.TeamName}>
                             <h2>{time.TeamName}</h2>
                             <h4>{time.Avg}</h4>
                         </TeamDiv>
