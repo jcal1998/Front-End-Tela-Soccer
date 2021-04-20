@@ -7,11 +7,11 @@ export const Container = styled.div`
     align-items: center;
     flex-direction: column;
 
-`
-
-export const Content = styled.div`
+    form{
     padding: 1rem;
     width: 100%;
+    }
+
 `
 
 export const CreateTitleDiv = styled.div`
@@ -46,7 +46,7 @@ export const TeamInformationDiv = styled.div`
 
 `
 
-export const FormDiv = styled.form`
+export const FormDiv = styled.div`
     margin-top: 2rem;
     width: 100%;
     display: flex;

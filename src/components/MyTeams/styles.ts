@@ -38,9 +38,7 @@ export const DescriptionDiv = styled.div`
         transition : filter 0.2s;
         display:flex;
         align-items: center;
-        padding-left:0.77rem;
-
-
+        padding: 0.7rem 0 0 0.49rem ;
 
         &:hover{
             filter: brightness(0.85) ;

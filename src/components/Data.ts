@@ -52,7 +52,7 @@ export const Data = () => (
       {
         TeamName: 'Real Madrid',
         Description: 'Real Madrid Club de Fútbol',
-        Avg : 29.33,
+        Avg : 29.35,
         Website : 'https://www.realmadrid.com/pt',
         Type : 'real',
         Formation: '4',
@@ -129,7 +129,7 @@ export const Data = () => (
       {
         TeamName: 'Liverpool',
         Description: 'Liverpool Football Club',
-        Avg : 28.33,
+        Avg : 25.33,
         Website : 'https://www.liverpoolfc.com/#',
         Type : 'real',
         Formation: '4',
