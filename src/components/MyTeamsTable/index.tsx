@@ -45,6 +45,7 @@ export function MyTeamsTable(){
     const debounceSearch = useCallback(debounce((variable: string)=>{//eslint-disable-line react-hooks/exhaustive-deps
         if(variable.length>3)
         setSearch(variable);
+        
     },700),[],) 
 
     const Variable = ( value : string ) => {
