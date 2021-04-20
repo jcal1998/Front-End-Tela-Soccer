@@ -9,7 +9,7 @@ import {TeamsContext} from '../../TeamsContext'
 Modal.setAppElement('#root')
 
 export function TeamInformation(){
-    const { createTeam,teams } = useContext(TeamsContext)
+    const { createTeam } = useContext(TeamsContext)
     const [ nameFocus, setNameFocus ] = useState (false)
     const [ siteFocus, setsiteFocus ] = useState (false) 
     const [ descriptionFocus, setDescriptionFocus ] = useState (false) 
@@ -39,7 +39,9 @@ export function TeamInformation(){
         const {name , age, nationality , carro , aviao, barco} = event.target
         const Player1 = { name : name.value, age : age.value, nationality : nationality.value}
         const Player2 = { name: carro.value , age: aviao.value , nationality: barco.value }
-        let Avg = 2;
+        console.log([Player1.age , Player2.age ])
+
+        let Avg = (Player1.age + Player2.age)/2 ;
         createTeam({
             TeamName,
             Description,
@@ -49,7 +51,6 @@ export function TeamInformation(){
             Players : [Player1 , Player2],
             Avg
         })
-        console.log(teams)
         handleOpenSuccessModal()
     }
 
@@ -72,7 +73,6 @@ export function TeamInformation(){
         // `https://v3.football.api-sports.io/players?search=${search}&season=2019`
         api.get(`https://v2.api-football.com/players/search/${search}`)
         .then( response => {
-            console.log("chamou a API")
             setRepositories (response.data.api.players)
         })
         .catch(err => {

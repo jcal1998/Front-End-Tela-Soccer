@@ -23,7 +23,8 @@ interface TeamsProviderProps {
 
 interface TeamsContextData {
     teams: Team[];
-    createTeam: (team: Team ) => void
+    createTeam: (team: Team ) => void;
+    setTeams : ( teams: Team[] ) => void
 }
 
 export const TeamsContext = createContext<TeamsContextData>(
@@ -38,7 +39,7 @@ export function TeamsProvider( {children}:TeamsProviderProps ){
     }
 
     return(
-        <TeamsContext.Provider value={{teams , createTeam}}>
+        <TeamsContext.Provider value={{teams , createTeam, setTeams}}>
             {children}
         </TeamsContext.Provider>
     )
