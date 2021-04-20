@@ -40,6 +40,8 @@ export function MyTeamsTable(){
     const [Players , setPlayers] = useState<Player[]>([])
     const [variable, setVariable] = useState('')
 
+    console.log(Players)
+
     const debounceSearch = useCallback(debounce((variable: string)=>{//eslint-disable-line react-hooks/exhaustive-deps
         if(variable.length>3)
         setSearch(variable);
@@ -136,7 +138,7 @@ export function MyTeamsTable(){
                 console.log(err);
             });
         }
-    }, [search]);
+    }, [search]);//eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <S.Container>

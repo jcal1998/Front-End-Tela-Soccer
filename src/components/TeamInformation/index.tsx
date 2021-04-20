@@ -91,7 +91,8 @@ export function TeamInformation(){
                 console.log(err);
             });
         }
-    }, [search]);
+
+    }, [search]);//eslint-disable-line react-hooks/exhaustive-deps
     
     return (
         <S.Container>
